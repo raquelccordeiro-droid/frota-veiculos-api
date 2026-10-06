@@ -1,16 +1,14 @@
 import express from "express";
-import {
-    cadastrarVeiculo,
-    listarVeiculos
-} from "../services/produto.service.js";
+import {Router} from "../services/produto.service.js";
+import { listarVeiculos } from "../services/veiculo.service.js";
 
-const router = express.Router();
+export const veiculoRouter = express.Router();
 
-router.post("/veiculos", async (req, res) => {
+veiculoRouter.post("/", async (req, res) => {
     try {
-        const veiculo = await cadastrarVeiculo(req.body);
+        const veiculo = await cadastrarVeiculo.create(req.body);
 
-        res.status(201).json(veiculo);
+        res.status(201).json(veiculo)
     } catch (error) {
         console.error(error);
 
@@ -20,9 +18,9 @@ router.post("/veiculos", async (req, res) => {
     }
 });
 
-router.get("/veiculos", async (req, res) => {
+veiculoRouter.get("/", async (req, res) => {
     try {
-        const veiculos = await listarVeiculos();
+        const veiculos = await veiculoServicelistarVeiculos();
 
         res.status(200).json(veiculos);
     } catch (error) {
